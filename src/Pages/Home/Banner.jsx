@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { Link } from "react-router";
-import { motion } from "framer-motion";
+// eslint-disable-next-line no-unused-vars
+import { motion  } from "framer-motion";
 import { FaArrowRight } from "react-icons/fa";
 import { AuthContext } from "../../Context/AuthContext";
 
-// Animation variants
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -23,7 +23,7 @@ const Banner = () => {
 
   return (
     <motion.section
-      className="relative overflow-hidden bg-linear-to-r from-indigo-600 via-purple-600 to-indigo-500 text-white py-28 md:py-33 px-6"
+      className="relative overflow-hidden bg-linear-to-r from-indigo-600 via-purple-600 to-indigo-500 text-white py-15 lg:33 md:py-23 px-6"
       initial="hidden"
       animate="visible"
       variants={containerVariants}
