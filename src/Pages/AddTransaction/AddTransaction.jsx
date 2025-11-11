@@ -33,21 +33,21 @@ const AddTransaction = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        authorization:`Bearer ${user.accessToken}`
+        authorization: `Bearer ${user.accessToken}`,
       },
       body: JSON.stringify(transaction),
     })
       .then((res) => res.json())
       .then((data) => {
         if (data.insertedId) {
-          toast.success("✅ Transaction added successfully!");
+          toast.success(" Transaction added successfully!");
           form.reset();
         } else {
-          toast.error("❌ Failed to add transaction!");
+          toast.error(" Failed to add transaction!");
         }
       })
       .catch(() => {
-        toast.error("⚠️ Something went wrong!");
+        toast.error(" Something went wrong!");
       })
       .finally(() => {
         setLoading(false);
@@ -55,19 +55,21 @@ const AddTransaction = () => {
   };
 
   return (
-    <div className="min-h-screen  flex justify-center items-center px-4 py-10">
-      <div className=" p-6 rounded-2xl shadow-md w-full max-w-lg">
-        <h2 className="text-2xl font-bold mb-4 text-center text-indigo-600">
+    <div className="flex justify-center items-center px-4 py-10 bg-gray-800 min-h-screen">
+      <div className="bg-gray-900 p-6 rounded-2xl shadow-lg w-full max-w-lg">
+        <h2 className="text-2xl font-bold mb-4 text-center text-indigo-400">
           Add Transaction
         </h2>
 
         <form onSubmit={handleAddTransaction} className="space-y-4">
           {/* Type */}
           <div>
-            <label className="block text-sm font-medium mb-1">Type</label>
+            <label className="block text-sm font-medium mb-1 text-gray-300">
+              Type
+            </label>
             <select
               name="type"
-              className="w-full border px-3 py-2 rounded-md"
+              className="w-full border border-gray-700 bg-gray-800 px-3 py-2 rounded-md text-gray-200"
               required
             >
               <option value="income">Income</option>
@@ -77,10 +79,12 @@ const AddTransaction = () => {
 
           {/* Category */}
           <div>
-            <label className="block text-sm font-medium mb-1">Category</label>
+            <label className="block text-sm font-medium mb-1 text-gray-300">
+              Category
+            </label>
             <select
               name="category"
-              className="w-full border px-3 py-2 rounded-md"
+              className="w-full border border-gray-700 bg-gray-800 px-3 py-2 rounded-md text-gray-200"
               required
             >
               <option value="salary">Salary</option>
@@ -94,68 +98,74 @@ const AddTransaction = () => {
 
           {/* Amount */}
           <div>
-            <label className="block text-sm font-medium mb-1">Amount</label>
+            <label className="block text-sm font-medium mb-1 text-gray-300">
+              Amount
+            </label>
             <input
               type="number"
               name="amount"
               placeholder="Enter amount"
-              className="w-full border px-3 py-2 rounded-md"
+              className="w-full border border-gray-700 bg-gray-800 px-3 py-2 rounded-md text-gray-200"
               required
             />
           </div>
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium mb-1">
+            <label className="block text-sm font-medium mb-1 text-gray-300">
               Description
             </label>
             <input
               type="text"
               name="description"
               placeholder="Enter description"
-              className="w-full border px-3 py-2 rounded-md"
+              className="w-full border border-gray-700 bg-gray-800 px-3 py-2 rounded-md text-gray-200"
               required
             />
           </div>
 
           {/* Date */}
           <div>
-            <label className="block text-sm font-medium mb-1">Date</label>
+            <label className="block text-sm font-medium mb-1 text-gray-300">
+              Date
+            </label>
             <input
               type="date"
               name="date"
-              className="w-full border px-3 py-2 rounded-md"
+              className="w-full border border-gray-700 bg-gray-800 px-3 py-2 rounded-md text-gray-200"
               required
             />
           </div>
 
           {/* User info */}
-          
-            <div>
-              <label className="block text-sm font-medium mb-1">Name</label>
-              <input
-                type="text"
-                value={user?.displayName || ""}
-                readOnly
-                className="w-full border px-3 py-2 rounded-md bg-gray-100"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Email</label>
-              <input
-                type="email"
-                value={user?.email || ""}
-                readOnly
-                className="w-full border px-3 py-2 rounded-md bg-gray-100"
-              />
-            </div>
-    
+          <div>
+            <label className="block text-sm font-medium mb-1 text-gray-300">
+              Name
+            </label>
+            <input
+              type="text"
+              value={user?.displayName || ""}
+              readOnly
+              className="w-full border border-gray-700 px-3 py-2 rounded-md bg-gray-800 text-gray-200"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1 text-gray-300">
+              Email
+            </label>
+            <input
+              type="email"
+              value={user?.email || ""}
+              readOnly
+              className="w-full border border-gray-700 px-3 py-2 rounded-md bg-gray-800 text-gray-200"
+            />
+          </div>
 
           {/* Submit Button */}
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-indigo-600 text-white py-2 rounded-md font-semibold hover:bg-indigo-700 transition"
+            className="w-full bg-indigo-400 text-gray-900 py-2 rounded-md font-semibold hover:bg-indigo-500 transition"
           >
             {loading ? "Adding..." : "Add Transaction"}
           </button>

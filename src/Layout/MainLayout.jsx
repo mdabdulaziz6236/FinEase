@@ -1,19 +1,26 @@
-import React from "react";
+import React, { use } from "react";
 import Navbar from "../Components/Navbar";
 import { Outlet } from "react-router";
 import Footer from "../Components/Footer";
 import { Toaster } from "react-hot-toast";
+import { AuthContext } from "../Context/AuthContext";
+import Loading from "../Pages/Loading/Loading";
 
 const MainLayout = () => {
-  return <div className="max-w-11/12 mx-auto">
-
-    <Navbar></Navbar>
-    <div>
+  const { loading } = use(AuthContext);
+  if (loading) {
+    return <Loading></Loading>;
+  }
+  return (
+    <div className="">
+      <Navbar></Navbar>
+      <div className="bg-gray-800">
         <Outlet></Outlet>
+      </div>
+      <Footer></Footer>
+      <Toaster position="top-right"></Toaster>
     </div>
-    <Footer></Footer>
-    <Toaster position="top-right"></Toaster>
-  </div>;
+  );
 };
 
 export default MainLayout;

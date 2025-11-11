@@ -43,57 +43,75 @@ const TransactionDetails = () => {
       </div>
     );
   return (
-    <div className="container mx-auto my-12  ">
-      <div className="max-w-2xl mx-auto bg-base-100 shadow-lg rounded-2xl overflow-hidden border border-base-200">
+    <div className="container mx-auto py-12">
+      <div className="max-w-2xl mx-auto bg-gray-900/90 shadow-2xl rounded-2xl overflow-hidden border border-gray-800 backdrop-blur-lg">
         {/* Header */}
         <div
-          className={`p-5  ${
-            transaction.type === "income" ? "bg-green-500" : "bg-red-500"
+          className={`p-6 ${
+            transaction.type === "income"
+              ? "bg-linear-to-r from-green-500 to-emerald-600"
+              : "bg-linear-to-r from-red-500 to-rose-600"
           } text-white`}
         >
-          <h2 className="text-3xl font-bold capitalize">{transaction.type}</h2>
+          <h2 className="text-3xl font-extrabold capitalize drop-shadow-lg">
+            {transaction.type}
+          </h2>
           <p className="text-lg capitalize opacity-90">
             {transaction.category}
           </p>
         </div>
 
         {/* Details */}
-        <div className="p-6 space-y-5">
-          <p className="text-gray-700 text-lg">
-            <strong>Description:</strong>{" "}
+        <div className="p-8 space-y-6">
+          <p className="text-gray-300 text-lg">
+            <strong className="text-indigo-400">Description:</strong>{" "}
             {transaction.description || "No description"}
           </p>
-          <hr />
+          <hr className="border-gray-700" />
 
           <div className="grid grid-cols-2 gap-6">
-            <div>
-              <p className=" text-xl text-gray-500">Amount</p>
+            <div className="text-center bg-gray-800/60 p-4 rounded-xl border border-gray-700 hover:border-indigo-500 transition">
+              <p className="text-lg text-gray-400">Amount</p>
               <p
                 className={`text-2xl font-bold ${
                   transaction.type === "income"
-                    ? "text-green-600"
-                    : "text-red-600"
+                    ? "text-green-400"
+                    : "text-red-400"
                 }`}
               >
-                {transaction.amount}
+                {transaction.amount}৳
               </p>
             </div>
-            <div>
-              <p className="text-xl text-gray-500">Date</p>
-              <p className="text-xl font-semibold text-gray-800">
+
+            <div className="text-center bg-gray-800/60 p-4 rounded-xl border border-gray-700 hover:border-pink-500 transition">
+              <p className="text-lg text-gray-400">Date</p>
+              <p className="text-xl font-semibold text-gray-100">
                 {transaction.date}
               </p>
             </div>
           </div>
 
-          <hr />
+          <hr className="border-gray-700" />
 
-          <div className="bg-gray-100 p-4 rounded-lg">
-            <p className="text-xl text-gray-500">
-              Total {transaction.type === "income" ? "Income" : "Expense"} for "
-              {transaction.category}" category
+          <div className="bg-linear-to-r from-indigo-900/60 via-gray-900/70 to-purple-900/60 p-6 rounded-xl border border-gray-700">
+            <p className="text-lg text-gray-300">
+              Total{" "}
+              <span
+                className={`font-semibold ${
+                  transaction.type === "income"
+                    ? "text-green-400"
+                    : "text-red-400"
+                }`}
+              >
+                {transaction.type === "income" ? "Income" : "Expense"}
+              </span>{" "}
+              for{" "}
+              <span className="text-indigo-400 font-semibold">
+                "{transaction.category}"
+              </span>{" "}
+              category
             </p>
-            <p className="text-2xl font-bold text-gray-900">
+            <p className="text-3xl font-extrabold text-white mt-2 tracking-wide">
               {categoryTotal} Taka
             </p>
           </div>

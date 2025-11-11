@@ -88,124 +88,133 @@ const Register = () => {
   };
 
   return (
-    <div className="flex  justify-center items-center min-h-screen">
-      <title>Register</title>
-      <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-        <h1 className="font-semibold text-3xl text-center mt-5">
-          Register your account
-        </h1>
+<div className="flex justify-center items-center min-h-screen bg-linear-to-br from-gray-950 via-gray-900 to-black px-4">
+  <title>Register</title>
+  <div className="card bg-linear-to-b from-gray-900 to-gray-800 w-full max-w-sm shrink-0 shadow-2xl rounded-2xl overflow-hidden border border-gray-700/60">
+    <h1 className="font-bold text-3xl text-center mt-6 bg-linear-to-r from-indigo-400 to-pink-400 bg-clip-text text-transparent drop-shadow-md">
+      Register your account
+    </h1>
 
-        <form onSubmit={handleRegister} className="card-body">
-          <fieldset className="fieldset">
-            {/* name */}
-            <label className="label">Your Name</label>
-            <input
-              name="name"
-              type="text"
-              className="input"
-              placeholder="Enter Your Name"
-              required
-            />
-            {nameError && (
-              <p className="text-sm text-secondary text-center">{nameError}</p>
-            )}
-            {/* email */}
-            <label className="label">Email</label>
-            <input
-              name="email"
-              type="email"
-              className="input"
-              placeholder="Email"
-              required
-            />
-            {emailError && (
-              <p className="text-sm text-secondary text-center">{emailError}</p>
-            )}
-            {/* phot url */}
-            <label className="label">Photo URL</label>
-            <input
-              name="photoUrl"
-              type="text"
-              className="input"
-              placeholder="Enter Your Photo URL"
-              required
-            />
+    <form onSubmit={handleRegister} className="card-body space-y-5">
+      <fieldset className="fieldset space-y-3">
+        {/* Name */}
+        <label className="label text-gray-300">Your Name</label>
+        <input
+          name="name"
+          type="text"
+          className="input bg-gray-800 text-gray-100 border-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 transition"
+          placeholder="Enter Your Name"
+          required
+        />
+        {nameError && (
+          <p className="text-sm text-red-500 text-center">{nameError}</p>
+        )}
 
-            {/* password */}
-            <label className="label">Password</label>
-            <div className="relative">
-              <input
-                name="password"
-                type={showPassword ? "text" : "password"}
-                className="input"
-                placeholder="Password"
-                required
-              />
-              <button
-                onClick={handleTogglePasswordShow}
-                className="absolute right-7 btn-xs top-2 btn"
-              >
-                {showPassword ? <FaEyeSlash /> : <FaEye></FaEye>}
-              </button>
-            </div>
-            {passwordError && (
-              <p className="text-sm text-secondary text-center">
-                {passwordError}
-              </p>
-            )}
+        {/* Email */}
+        <label className="label text-gray-300">Email</label>
+        <input
+          name="email"
+          type="email"
+          className="input bg-gray-800 text-gray-100 border-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 transition"
+          placeholder="Enter Your Email"
+          required
+        />
+        {emailError && (
+          <p className="text-sm text-red-500 text-center">{emailError}</p>
+        )}
 
-            <button type="submit" className="btn btn-neutral mt-5">
-              Sign Up
-            </button>
-          </fieldset>
-          <p className="font-semibold text-center">
-            Already have an account ? Please{" "}
-            <Link
-              to="/login"
-              className="text-green-500 font-semibold  hover:underline hover:text-pink-500"
-            >
-              Login
-            </Link>
-          </p>
-        </form>
-        <div className="flex justify-center pb-5">
-          {/* Google */}
+        {/* Photo URL */}
+        <label className="label text-gray-300">Photo URL</label>
+        <input
+          name="photoUrl"
+          type="text"
+          className="input bg-gray-800 text-gray-100 border-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 transition"
+          placeholder="Enter Your Photo URL"
+          required
+        />
+
+        {/* Password */}
+        <label className="label text-gray-300">Password</label>
+        <div className="relative">
+          <input
+            name="password"
+            type={showPassword ? "text" : "password"}
+            className="input bg-gray-800 text-gray-100 border-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 transition"
+            placeholder="Enter Your Password"
+            required
+          />
           <button
-            onClick={handleSignInWithGoogle}
-            className="btn hover:bg-black hover:text-white bg-white text-black border-[#e5e5e5]"
+            type="button"
+            onClick={handleTogglePasswordShow}
+            className="absolute right-7 top-2.5 text-gray-400 hover:text-indigo-400 transition"
           >
-            <svg
-              aria-label="Google logo"
-              width="16"
-              height="16"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 512"
-            >
-              <g>
-                <path d="m0 0H512V512H0" fill="#fff"></path>
-                <path
-                  fill="#34a853"
-                  d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"
-                ></path>
-                <path
-                  fill="#4285f4"
-                  d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"
-                ></path>
-                <path
-                  fill="#fbbc02"
-                  d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"
-                ></path>
-                <path
-                  fill="#ea4335"
-                  d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"
-                ></path>
-              </g>
-            </svg>
-            Login with Google
+            {showPassword ? <FaEyeSlash /> : <FaEye />}
           </button>
         </div>
-      </div>
+        {passwordError && (
+          <p className="text-sm text-red-500 text-center">{passwordError}</p>
+        )}
+
+        {/* Submit Button */}
+        <button
+          type="submit"
+          className="w-full bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-pink-500 hover:to-indigo-600 text-white py-2 rounded-lg font-semibold shadow-lg transition-all duration-300 transform hover:scale-105"
+        >
+          Sign Up
+        </button>
+      </fieldset>
+
+      <p className="font-medium text-center text-gray-300">
+        Already have an account?{" "}
+        <Link
+          to="/login"
+          className="text-indigo-400 font-semibold hover:text-pink-400 hover:underline transition"
+        >
+          Login
+        </Link>
+      </p>
+    </form>
+
+    {/* Google Sign Up */}
+    <div className="flex justify-center pb-6 mt-2">
+      <button
+        onClick={handleSignInWithGoogle}
+        className="btn hover:bg-black hover:text-white bg-white text-black border-[#e5e5e5]"
+      >
+        <svg
+          aria-label="Google logo"
+          width="16"
+          height="16"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 512 512"
+        >
+          <g>
+            <path d="m0 0H512V512H0" fill="#fff"></path>
+            <path
+              fill="#34a853"
+              d="M153 292c30 82 118 95 171 60h62v48A192 192 0 0190 341"
+            ></path>
+            <path
+              fill="#4285f4"
+              d="m386 400a140 175 0 0053-179H260v74h102q-7 37-38 57"
+            ></path>
+            <path
+              fill="#fbbc02"
+              d="m90 341a208 200 0 010-171l63 49q-12 37 0 73"
+            ></path>
+            <path
+              fill="#ea4335"
+              d="m153 219c22-69 116-109 179-50l55-54c-78-75-230-72-297 55"
+            ></path>
+          </g>
+        </svg>
+        Sign up with Google
+      </button>
     </div>
+  </div>
+</div>
+
+
   );
 };
 

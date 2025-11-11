@@ -51,7 +51,7 @@ const Login = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         toast.success(`"user sign in" ${user.displayName}`);
-        setUser(user)
+        setUser(user);
         navigate(location?.state || "/");
         setLoading(false);
       })
@@ -77,79 +77,91 @@ const Login = () => {
       });
   };
   return (
-    <div className="flex   justify-center items-center min-h-screen">
+    <div className="flex justify-center items-center min-h-screen bg-linear-to-br from-gray-950 via-gray-900 to-black px-4">
       <title>Login</title>
-      <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-        <h1 className="font-semibold text-3xl text-center mt-5">
-          Login your account
+      <div className="card bg-linear-to-b from-gray-900 to-gray-800 w-full max-w-sm shrink-0 shadow-2xl rounded-2xl overflow-hidden border border-gray-700/60">
+        <h1 className="font-bold text-3xl text-center mt-6 bg-linear-to-r from-indigo-400 to-pink-400 bg-clip-text text-transparent drop-shadow-md">
+          Login to your account
         </h1>
-        <form onSubmit={handleLogIn} className="card-body">
-          <fieldset className="fieldset">
-            {/* email */}
-            <label className="label">Email</label>
+
+        <form onSubmit={handleLogIn} className="card-body space-y-5">
+          <fieldset className="fieldset space-y-3">
+            {/* Email */}
+            <label className="label text-gray-300">Email</label>
             <input
               name="email"
               type="email"
-              className="input"
-              placeholder="Email"
+              className="input bg-gray-800 text-gray-100 border-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 transition"
+              placeholder="Enter your email"
               onChange={(e) => setEmail(e.target.value)}
               required
             />
             {emailError && (
-              <p className="text-sm text-secondary text-center">{emailError}</p>
+              <p className="text-sm text-red-500 text-center">{emailError}</p>
             )}
-            {/* password */}
-            <label className="label">Password</label>
+
+            {/* Password */}
+            <label className="label text-gray-300">Password</label>
             <div className="relative">
               <input
                 name="password"
                 type={showPassword ? "text" : "password"}
-                className="input"
-                placeholder="Password"
+                className="input bg-gray-800 text-gray-100 border-gray-700 placeholder-gray-400 focus:ring-2 focus:ring-indigo-500 transition"
+                placeholder="Enter your password"
                 required
               />
               <button
+                type="button"
                 onClick={handleTogglePasswordShow}
-                className="absolute right-7 btn-xs top-2 btn"
+                className="absolute right-7 top-2 btn btn-xs"
               >
-                {showPassword ? <FaEyeSlash /> : <FaEye></FaEye>}
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
             </div>
             {passwordError && (
-              <p className="text-sm text-secondary text-center">
+              <p className="text-sm text-red-500 text-center">
                 {passwordError}
               </p>
             )}
 
-            <div>
+            <div className="text-right">
               <Link
                 onClick={handleForgetPassword}
-                className=" hover:underline text-[12px] hover:text-pink-500 text-green-500 font-medium"
+                className="text-indigo-400 text-[12px] hover:text-pink-400 hover:underline transition"
               >
                 Forgot password?
               </Link>
             </div>
-            <button type="submit" className="btn btn-neutral mt-5">
+
+            {/* Login Button */}
+            <button
+              type="submit"
+              className="w-full bg-linear-to-r from-indigo-500 to-purple-600 hover:from-pink-500 hover:to-indigo-600 text-white py-2 rounded-lg font-semibold shadow-lg transition-all duration-300 transform hover:scale-105"
+            >
               Login
             </button>
           </fieldset>
-          <p className="font-semibold text-center">
-            Dont’t Have An Account ?{" "}
+
+          {/* Register Link */}
+          <p className="font-medium text-center text-gray-300">
+            Don’t have an account?{" "}
             <Link
               to="/register"
-              className="text-green-500 font-semibold  hover:underline hover:text-pink-500"
+              className="text-indigo-400 font-semibold hover:text-pink-400 hover:underline transition"
             >
               Register
             </Link>
           </p>
+
           {error && (
             <p className="text-center text-red-500 font-semibold mt-2">
               {error}
             </p>
           )}
         </form>
-        <div className="flex justify-center pb-5">
-          {/* Google */}
+
+        {/* Google Button  */}
+        <div className="flex justify-center pb-6 mt-2">
           <button
             onClick={handleSignInWithGoogle}
             className="btn hover:bg-black hover:text-white bg-white text-black border-[#e5e5e5]"

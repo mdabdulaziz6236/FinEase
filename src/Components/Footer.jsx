@@ -5,94 +5,88 @@ import { Link } from "react-router";
 
 const Footer = () => {
   return (
-    <footer className="bg-white dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800 text-gray-600 dark:text-gray-400">
+    <footer className="bg-linear-to-b from-gray-900 via-gray-800 to-black text-gray-300 border-t border-gray-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* 1. Website Info (Logo & Name) */}
-          <div className="md:col-span-1">
+          {/*  Website Info */}
+          <div>
             <Link to="/" className="flex items-center space-x-2 mb-4">
-              <FaWallet className="text-3xl text-indigo-600 dark:text-indigo-400" />
-              <span className="text-2xl font-bold text-gray-900 dark:text-white">
+              <FaWallet className="text-3xl text-indigo-400" />
+              <span className="text-2xl font-bold bg-linear-to-r from-indigo-400 to-pink-500 bg-clip-text text-transparent">
                 FinEase
               </span>
             </Link>
-            <p className="text-sm">
-              Take control of your finances. Simple, insightful, and secure.
+            <p className="text-sm text-gray-400">
+              Take control of your finances — simple, insightful, and secure.
             </p>
           </div>
 
-          {/* 2. Quick Links */}
+          {/*  Quick Links */}
           <div>
-            <h5 className="text-sm font-semibold uppercase text-gray-800 dark:text-gray-200 tracking-wider mb-4">
+            <h5 className="text-sm font-semibold uppercase text-indigo-300 tracking-wider mb-4">
               Quick Links
             </h5>
             <nav className="flex flex-col space-y-2">
               <Link
                 to="/add-transaction"
-                className="hover:text-gray-900 dark:hover:text-white transition-colors"
+                className="hover:text-pink-400 transition-colors"
               >
                 Add Transaction
               </Link>
               <Link
                 to="/my-transaction"
-                className="hover:text-gray-900 dark:hover:text-white transition-colors"
+                className="hover:text-pink-400 transition-colors"
               >
                 My Transactions
               </Link>
               <Link
                 to="/reports"
-                className="hover:text-gray-900 dark:hover:text-white transition-colors"
+                className="hover:text-pink-400 transition-colors"
               >
                 Reports
               </Link>
               <Link
                 to="/profile"
-                className="hover:text-gray-900 dark:hover:text-white transition-colors"
+                className="hover:text-pink-400 transition-colors"
               >
                 Profile
               </Link>
             </nav>
           </div>
 
-          {/* 3. Legal */}
+          {/*  Legal */}
           <div>
-            <h5 className="text-sm font-semibold uppercase text-gray-800 dark:text-gray-200 tracking-wider mb-4">
+            <h5 className="text-sm font-semibold uppercase text-indigo-300 tracking-wider mb-4">
               Legal
             </h5>
             <nav className="flex flex-col space-y-2">
-              <Link
-                className="hover:text-gray-900 dark:hover:text-white transition-colors"
-              >
+              <Link className="hover:text-pink-400 transition-colors">
                 Terms & Conditions
               </Link>
-              <Link
-                className="hover:text-gray-900 dark:hover:text-white transition-colors"
-              >
+              <Link className="hover:text-pink-400 transition-colors">
                 Privacy Policy
               </Link>
-              <Link
-                className="hover:text-gray-900 dark:hover:text-white transition-colors"
-              >
+              <Link className="hover:text-pink-400 transition-colors">
                 Contact Us
               </Link>
             </nav>
           </div>
 
-          {/* 4. Contact Details */}
+          {/* Contact */}
           <div>
-            <h5 className="text-sm font-semibold uppercase text-gray-800 dark:text-gray-200 tracking-wider mb-4">
+            <h5 className="text-sm font-semibold uppercase text-indigo-300 tracking-wider mb-4">
               Contact Us
             </h5>
             <address className="not-italic flex flex-col space-y-2">
               <a
                 href="mailto:support@finease.com"
-                className="hover:text-gray-900 dark:hover:text-white transition-colors"
+                className="hover:text-pink-400 transition-colors"
               >
                 support@finease.com
               </a>
               <a
                 href="tel:+880123456789"
-                className="hover:text-gray-900 dark:hover:text-white transition-colors"
+                className="hover:text-pink-400 transition-colors"
               >
                 (+880) 123-456-789
               </a>
@@ -100,35 +94,26 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* --- Bottom Bar (Copyright & Socials) --- */}
-        <div className="mt-10 pt-8 border-t border-gray-200 dark:border-gray-800 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-sm text-center md:text-left">
-            &copy; {new Date().getFullYear()} FinEase. All rights reserved.
+        {/* Bottom Bar */}
+        <div className="mt-10 pt-8 border-t border-gray-700 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-sm text-gray-500 text-center md:text-left">
+            &copy; {new Date().getFullYear()}{" "}
+            <span className="text-indigo-400 font-semibold">FinEase</span>. All
+            rights reserved.
           </p>
+
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link
-              className="hover:text-gray-900 dark:hover:text-white transition-colors"
-            >
+            <Link className="text-gray-400 hover:text-indigo-400 transition-colors">
               <FaFacebook size={20} />
-              <span className="sr-only">Facebook</span>
             </Link>
-            <Link
-              className="hover:text-gray-900 dark:hover:text-white transition-colors"
-            >
+            <Link className="text-gray-400 hover:text-pink-400 transition-colors">
               <FaInstagram size={20} />
-              <span className="sr-only">Instagram</span>
             </Link>
-            <Link
-              className="hover:text-gray-900 dark:hover:text-white transition-colors"
-            >
+            <Link className="text-gray-400 hover:text-blue-400 transition-colors">
               <FaXTwitter size={20} />
-              <span className="sr-only">X (Twitter)</span>
             </Link>
-            <Link
-              className="hover:text-gray-900 dark:hover:text-white transition-colors"
-            >
+            <Link className="text-gray-400 hover:text-gray-100 transition-colors">
               <FaGithub size={20} />
-              <span className="sr-only">GitHub</span>
             </Link>
           </div>
         </div>

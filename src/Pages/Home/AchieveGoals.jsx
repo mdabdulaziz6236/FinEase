@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
-import {FaTrophy,FaChartLine,FaMoneyBillWave,} from "react-icons/fa";
+import { FaTrophy, FaChartLine, FaMoneyBillWave } from "react-icons/fa";
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -21,7 +21,7 @@ const headingVariants = {
 
 const AchieveGoals = () => {
   return (
-    <section className="bg-gray-50 dark:bg-gray-950 py-15 lg:py-25 md:py-20 px-6">
+    <section className="bg-gray-800 py-15 lg:py-25 md:py-20 px-6">
       <div className="max-w-6xl mx-auto">
         {/* --- Section Heading --- */}
         <motion.div
@@ -31,10 +31,10 @@ const AchieveGoals = () => {
           viewport={{ once: true }}
           variants={headingVariants}
         >
-          <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-4">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4">
             Your Goals, Within Reach
           </h2>
-          <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
             Managing money isn't just about numbers. It's about building the
             future you dream of, one step at a time.
           </p>
@@ -50,29 +50,29 @@ const AchieveGoals = () => {
         >
           {/* Card 1 */}
           <motion.div
-            className="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-800"
+            className="bg-gray-900 p-8 rounded-2xl shadow-lg border border-gray-800"
             variants={cardVariants}
           >
-            <FaMoneyBillWave className="text-4xl text-indigo-500 mb-5" />{" "}
-            <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-3">
+            <FaMoneyBillWave className="text-4xl text-indigo-400 mb-5" />
+            <h3 className="text-2xl font-semibold text-white mb-3">
               Plan Your Savings
             </h3>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-gray-400">
               Set and track tangible goals, from a new laptop to your dream
               vacation.
             </p>
           </motion.div>
 
-         {/*  Card 2 */}
+          {/* Card 2 */}
           <motion.div
-            className="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-800"
+            className="bg-gray-900 p-8 rounded-2xl shadow-lg border border-gray-800"
             variants={cardVariants}
           >
-            <FaChartLine className="text-4xl text-green-500 mb-5" />
-            <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-3">
+            <FaChartLine className="text-4xl text-green-400 mb-5" />
+            <h3 className="text-2xl font-semibold text-white mb-3">
               See Your Growth
             </h3>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-gray-400">
               Watch your net worth grow as you make smarter financial decisions
               every day.
             </p>
@@ -80,14 +80,14 @@ const AchieveGoals = () => {
 
           {/* Card 3 */}
           <motion.div
-            className="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-gray-800"
+            className="bg-gray-900 p-8 rounded-2xl shadow-lg border border-gray-800"
             variants={cardVariants}
           >
-            <FaTrophy className="text-4xl text-yellow-500 mb-5" />
-            <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-3">
+            <FaTrophy className="text-4xl text-yellow-400 mb-5" />
+            <h3 className="text-2xl font-semibold text-white mb-3">
               Achieve Milestones
             </h3>
-            <p className="text-gray-600 dark:text-gray-400">
+            <p className="text-gray-400">
               Celebrate when you pay off debt or hit a new savings milestone.
             </p>
           </motion.div>
