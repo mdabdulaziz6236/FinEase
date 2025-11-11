@@ -1,11 +1,12 @@
 import React, { use, useEffect, useState } from "react";
-import { Link, NavLink, useNavigate } from "react-router";
+import { Link, NavLink, useLocation, useNavigate } from "react-router";
 import { ImProfile } from "react-icons/im";
 import { AuthContext } from "../Context/AuthContext";
 import toast from "react-hot-toast";
 
 const Navbar = () => {
   const { user, LogOut } = use(AuthContext);
+  const location = useLocation()
   const navigate = useNavigate();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   useEffect(() => {
@@ -49,10 +50,15 @@ const Navbar = () => {
   const handleLogOut = () => {
     LogOut()
       .then(() => {
-        toast.success("LogOut Successfully");
-        navigate("/");
+        toast.success("Logged out successfully!");
+        navigate("/", { state: { from: location.pathname } });
       })
-      .catch();
+      .catch((error) => {
+        if(error){
+
+          toast.error("Logout failed!");
+        }
+      });
   };
   const handleTheme = (checked) => {
     setTheme(checked ? "dark" : "light");

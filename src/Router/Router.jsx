@@ -11,6 +11,8 @@ import MyTransactions from "../Pages/MyTransactions/MyTransactions";
 import Reports from "../Pages/Reports/Reports";
 import TransactionDetails from "../Pages/TransactionDetails/TransactionDetails";
 import UpdateTransaction from "../Pages/UpdateTransaction/UpdateTransaction";
+import PrivetRoutes from "./PrivetRoutes";
+import ErrorPage from "../Pages/ErrorPgae/ErrorPage";
 
 export const router = createBrowserRouter([
   {
@@ -35,32 +37,54 @@ export const router = createBrowserRouter([
       },
       {
         path: "/profile",
-        Component: Profile,
+        element: (
+          <PrivetRoutes>
+            <Profile></Profile>,
+          </PrivetRoutes>
+        ),
       },
       {
         path: "/update-profile",
-        Component: UpdateProfile,
+         element: (
+          <PrivetRoutes>
+           <UpdateProfile></UpdateProfile>
+          </PrivetRoutes>
+        ),
+        
       },
       {
         path: "/add-transaction",
-        Component: AddTransaction,
+        element:<PrivetRoutes>
+          <AddTransaction></AddTransaction>
+        </PrivetRoutes>
       },
       {
         path: "/my-transaction",
-        Component: MyTransactions,
+        element:<PrivetRoutes>
+          <MyTransactions></MyTransactions>
+        </PrivetRoutes>
       },
       {
         path: "/reports",
-        Component: Reports,
+       element:<PrivetRoutes>
+        <Reports></Reports>
+       </PrivetRoutes>
       },
       {
         path: "/transactionDetails/:id",
-        Component: TransactionDetails,
+        element:<PrivetRoutes>
+          <TransactionDetails></TransactionDetails>
+        </PrivetRoutes>
       },
       {
         path: "/transaction/update/:id",
-        Component: UpdateTransaction,
-      },
+        element:<PrivetRoutes>
+          <UpdateTransaction></UpdateTransaction>
+        </PrivetRoutes>
+      },{
+        path:'/*',
+        Component:ErrorPage,
+      }
     ],
   },
 ]);
