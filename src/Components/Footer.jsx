@@ -9,12 +9,12 @@ const Footer = () => {
 
   return (
     <footer 
-      className="bg-linear-to-b from-gray-50 via-white to-gray-100 dark:from-gray-900 dark:via-gray-800 dark:to-black
+      className="bg-linear-to-b  dark:from-gray-900 dark:via-gray-800 dark:to-black
                  text-gray-800 dark:text-gray-300 border-t border-gray-200 dark:border-gray-700 shadow-xl"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/*  Website Info */}
+          {/* Website Info */}
           <div>
             <Link to="/" className="flex items-center space-x-2 mb-4">
               <FaWallet className="text-3xl text-indigo-600 dark:text-cyan-400" />
@@ -29,7 +29,7 @@ const Footer = () => {
             </p>
           </div>
 
-          {/*  Quick Links */}
+          {/* Quick Links */}
           <div>
             <h5 
               className="text-sm font-bold uppercase text-indigo-600 dark:text-indigo-300 tracking-wider mb-4 border-b border-indigo-200 dark:border-indigo-800 pb-1"
@@ -52,7 +52,7 @@ const Footer = () => {
             </nav>
           </div>
 
-          {/*  Legal */}
+          {/* Legal */}
           <div>
             <h5 
 

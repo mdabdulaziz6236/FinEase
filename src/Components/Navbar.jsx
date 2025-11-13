@@ -164,7 +164,7 @@ const Navbar = () => {
               to="/"
               className="hover:underline 
                          text-pink-500 dark:text-cyan-400 
-                         font-bold text-3xl"
+                         font-bold text-2xl lg:text-3xl"
             >
               FinEase
             </Link>

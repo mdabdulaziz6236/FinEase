@@ -21,17 +21,17 @@ const headingVariants = {
 
 const AchieveGoals = () => {
   return (
-<section className="py-16 lg:py-24 md:py-20 px-6 bg-gray-50 dark:bg-gray-800 transition-colors duration-500">
+<section className=" lg:py-24 md:py-20 py-7 px-6 bg-gray-50 dark:bg-gray-800 transition-colors duration-500">
   <div className="max-w-6xl mx-auto">
     {/*  Section Heading  */}
     <motion.div
-      className="text-center mb-16"
+      className="text-center md:mb-10 mb-8 lg:mb-16"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true }}
       variants={headingVariants}
     >
-      <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 dark:text-white mb-4">
+      <h2 className="text-3xl md:text-4xl font-extrabold text-indigo-700 dark:text-cyan-400 mb-4">
         Your Goals, Within Reach
       </h2>
       <p className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
