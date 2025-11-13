@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useMemo } from "react";
+import React, { useEffect, useState, use } from "react";
 import {
   PieChart,
   Pie,
@@ -49,38 +49,8 @@ const processCategoryData = (filtered) =>
     return acc;
   }, []);
 
-const CustomBarTooltip = ({ active, payload, label }) =>
-  active && payload?.length ? (
-    <div className="p-3 bg-gray-900 border border-cyan-700/50 rounded-lg shadow-xl shadow-cyan-900/10">
-      <p className="text-gray-100 font-bold mb-1">{label}</p>
-      {payload.map((pld, i) => (
-        <p
-          key={i}
-          style={{ color: pld.fill }}
-          className="font-semibold text-sm"
-        >{`${pld.dataKey.charAt(0).toUpperCase() + pld.dataKey.slice(1)} : ${
-          pld.value
-        }`}</p>
-      ))}
-    </div>
-  ) : null;
-
-const CustomPieTooltip = ({ active, payload }) =>
-  active && payload?.length ? (
-    <div
-      className="p-3 bg-gray-900 border rounded-lg shadow-xl"
-      style={{ borderColor: payload[0].fill || "#F3F4F6" }}
-    >
-      <p className="text-gray-100 font-bold mb-1">{payload[0].name}</p>
-      <p
-        style={{ color: payload[0].fill }}
-        className="font-semibold text-sm"
-      >{`Amount: ${payload[0].value}`}</p>
-    </div>
-  ) : null;
-
 const Reports = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = use(AuthContext);
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filterMonth, setFilterMonth] = useState("");
@@ -108,30 +78,19 @@ const Reports = () => {
       }
     })();
   }, [user]);
+  const filteredTransactions = transactions.filter((tx) => {
+    const typeMatch = tx.type.toLowerCase() === selectedType;
+    const monthMatch = filterMonth
+      ? new Date(tx.date).getMonth() + 1 === Number(filterMonth)
+      : true;
+    return typeMatch && monthMatch;
+  });
 
-  const filteredTransactions = useMemo(
-    () =>
-      transactions.filter((tx) => {
-        const typeMatch = tx.type.toLowerCase() === selectedType;
-        const monthMatch = filterMonth
-          ? new Date(tx.date).getMonth() + 1 === Number(filterMonth)
-          : true;
-        return typeMatch && monthMatch;
-      }),
-    [transactions, selectedType, filterMonth]
-  );
+  const categoryData = processCategoryData(filteredTransactions);
 
-  const categoryData = useMemo(
-    () => processCategoryData(filteredTransactions),
-    [filteredTransactions]
-  );
-  const filteredMonthlyData = useMemo(
-    () =>
-      filterMonth
-        ? monthlyData.filter((_, i) => i + 1 === Number(filterMonth))
-        : monthlyData,
-    [monthlyData, filterMonth]
-  );
+  const filteredMonthlyData = filterMonth
+    ? monthlyData.filter((_, i) => i + 1 === Number(filterMonth))
+    : monthlyData;
 
   const sliceColors =
     selectedType === "income" ? INCOME_SLICES : EXPENSE_SLICES;
@@ -140,37 +99,33 @@ const Reports = () => {
     selectedType.charAt(0).toUpperCase() + selectedType.slice(1);
 
   if (loading) return <Loading />;
+
   if (transactions.length === 0)
     return (
-      <div className="p-4 max-w-7xl mx-auto sm:p-6 bg-gray-800 text-gray-100  text-center">
-        <h2 className="text-2xl sm:text-3xl font-bold mb-4">
-          Financial Reports{" "}
+      <div className="p-4 text-center min-h-screen dark:bg-gray-900 bg-gray-50">
+        <h2 className="text-3xl font-bold text-indigo-700 dark:text-cyan-400">
+          No Transactions Found!
         </h2>
-        <div className="mt-20 p-10 bg-gray-800 rounded-lg shadow-xl">
-          <p className="text-xl text-yellow-400"> No Transactions Found!</p>
-          <p className="text-gray-400 mt-2">
-            Please add some income or expense transactions to view the reports.
-          </p>
-        </div>
+        <p className="text-gray-600 dark:text-gray-400 mt-2">
+          Please add some income or expense transactions to view the reports.
+        </p>
       </div>
     );
 
   return (
-    <div className="p-4 sm:p-6 max-w-11/12 mx-auto bg-gray-800 text-gray-100">
-      <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-center sm:text-left">
-        Financial Reports{" "}
+    <div className="p-4 sm:p-6 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-200 min-h-screen">
+      <h2 className="text-3xl sm:text-4xl font-extrabold mb-8 text-indigo-700 dark:text-cyan-400 text-center sm:text-left">
+        Financial Reports
       </h2>
 
       {/* Filters */}
-      <div className="mb-8 flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-        <div className="flex items-center gap-2 w-full sm:w-auto">
-          <label className="font-medium text-gray-300 min-w-[120px]">
-            Filter by Month:
-          </label>
+      <div className="mb-8 flex flex-col sm:flex-row gap-4 p-4 bg-gray-100 dark:bg-gray-800/50 rounded-lg border border-gray-200 dark:border-gray-700">
+        <div className="flex items-center gap-2">
+          <label className="font-medium">Filter by Month:</label>
           <select
             value={filterMonth}
             onChange={(e) => setFilterMonth(e.target.value)}
-            className="border p-2 rounded bg-gray-800 text-gray-100 border-gray-700 sm:w-auto focus:ring-2 focus:ring-cyan-400 transition"
+            className="border p-2 rounded bg-white dark:bg-gray-700"
           >
             <option value="">All</option>
             {Array.from({ length: 12 }, (_, i) => (
@@ -181,14 +136,12 @@ const Reports = () => {
           </select>
         </div>
 
-        <div className="flex items-center gap-2 sm:w-auto">
-          <label className="font-medium text-gray-300 min-w-[120px]">
-            Filter by Type:
-          </label>
+        <div className="flex items-center gap-2">
+          <label className="font-medium">Filter by Type:</label>
           <select
             value={selectedType}
             onChange={(e) => setSelectedType(e.target.value)}
-            className="border p-2 rounded bg-gray-800 text-gray-100 border-gray-700 sm:w-auto focus:ring-2 focus:ring-violet-400 transition"
+            className="border p-2 rounded bg-white dark:bg-gray-700"
           >
             <option value="income">Income</option>
             <option value="expense">Expense</option>
@@ -198,89 +151,58 @@ const Reports = () => {
 
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div className="bg-gray-900 p-4 rounded-2xl shadow-xl border border-gray-800">
-          <h3 className="text-xl sm:text-2xl font-semibold mb-4 text-center sm:text-left text-gray-100">
-            {chartTitle} by Category{" "}
+        {/* Pie Chart */}
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl">
+          <h3 className="text-xl sm:text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-100">
+            {chartTitle} by Category
           </h3>
-          <div className="w-full flex items-center justify-center h-64 sm:h-96">
-            <ResponsiveContainer width="100%" height="100%">
-              {categoryData.length > 0 ? (
-                <PieChart>
-                  <Pie
-                    data={categoryData}
-                    dataKey="value"
-                    nameKey="name"
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={PIE_INNER_RADIUS}
-                    outerRadius={PIE_OUTER_RADIUS}
-                    fill={pieBaseColor}
-                    labelLine={false}
-                    label={({ name, percent }) =>
-                      `${name} (${(percent * 100).toFixed(1)}%)`
-                    }
-                    style={{ outline: "none" }}
-                  >
-                    {categoryData.map((_, i) => (
-                      <Cell
-                        key={i}
-                        fill={sliceColors[i % sliceColors.length]}
-                        strokeWidth={2}
-                        stroke={sliceColors[i % sliceColors.length]}
-                      />
-                    ))}
-                  </Pie>
-                  <Tooltip content={<CustomPieTooltip />} />
-                </PieChart>
-              ) : (
-                <></>
-              )}
-            </ResponsiveContainer>
-          </div>
+          <ResponsiveContainer width="100%" height={350}>
+            <PieChart>
+              <Pie
+                data={categoryData}
+                dataKey="value"
+                nameKey="name"
+                cx="50%"
+                cy="50%"
+                innerRadius={PIE_INNER_RADIUS}
+                outerRadius={PIE_OUTER_RADIUS}
+                fill={pieBaseColor}
+                label={({ name, percent }) =>
+                  `${name} (${(percent * 100).toFixed(1)}%)`
+                }
+              >
+                {categoryData.map((_, i) => (
+                  <Cell
+                    key={i}
+                    fill={sliceColors[i % sliceColors.length]}
+                    stroke={sliceColors[i % sliceColors.length]}
+                  />
+                ))}
+              </Pie>
+              <Tooltip />
+            </PieChart>
+          </ResponsiveContainer>
         </div>
 
-        <div className="bg-gray-900 p-4 rounded-2xl shadow-xl border border-gray-800">
-          <h3 className="text-xl sm:text-2xl font-semibold mb-4 text-center sm:text-left text-gray-100">
-            Income vs Expense by Month{" "}
+        {/* Bar Chart */}
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl">
+          <h3 className="text-xl sm:text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-100">
+            Income vs Expense by Month
           </h3>
-          <div className="w-full h-64 sm:h-96">
-            <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={filteredMonthlyData}>
-                <XAxis
-                  dataKey="month"
-                  stroke="#9CA3AF"
-                  tick={{ fill: "#9CA3AF", fontSize: 12 }}
-                  interval={0}
-                />
-                <YAxis
-                  stroke="#9CA3AF"
-                  tick={{ fill: "#9CA3AF", fontSize: 12 }}
-                  tickFormatter={(v) => `${v}`}
-                />
-                <Tooltip content={<CustomBarTooltip />} />
-                <Legend
-                  wrapperStyle={{
-                    color: "#D1D5DB",
-                    fontWeight: "600",
-                    paddingTop: "10px",
-                  }}
-                  iconType="circle"
-                />
-                <Bar
-                  dataKey="income"
-                  fill={INCOME_COLOR}
-                  radius={[6, 6, 0, 0]}
-                  name="Income"
-                />
-                <Bar
-                  dataKey="expense"
-                  fill={EXPENSE_COLOR}
-                  radius={[6, 6, 0, 0]}
-                  name="Expense"
-                />
-              </BarChart>
-            </ResponsiveContainer>
-          </div>
+          <ResponsiveContainer width="100%" height={350}>
+            <BarChart data={filteredMonthlyData}>
+              <XAxis dataKey="month" />
+              <YAxis />
+              <Tooltip />
+              <Legend />
+              <Bar dataKey="income" fill={INCOME_COLOR} radius={[6, 6, 0, 0]} />
+              <Bar
+                dataKey="expense"
+                fill={EXPENSE_COLOR}
+                radius={[6, 6, 0, 0]}
+              />
+            </BarChart>
+          </ResponsiveContainer>
         </div>
       </div>
     </div>

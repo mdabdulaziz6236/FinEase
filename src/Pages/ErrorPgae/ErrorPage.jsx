@@ -4,10 +4,10 @@ import { Link } from "react-router";
 
 const ErrorPage = () => {
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-900 ">
+    <div className="flex flex-col items-center  justify-center h-screen dark:bg-gray-900 ">
       <title>Error page</title>
       <h1 className="text-9xl font-extrabold text-pink-500 drop-shadow-lg">404</h1>
-      <h2 className="text-3xl text-white font-bold mt-4">Oops! Page Not Found</h2>
+      <h2 className="text-3xl dark:text-white font-bold mt-4">Oops! Page Not Found</h2>
       
       <Link
         to="/"

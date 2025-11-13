@@ -5,6 +5,7 @@ import FinancialOverview from "./FinancialOverview";
 
 const Home = () => {
   return <div>
+    <title>Home</title>
     <Banner></Banner>
     <FinancialOverview></FinancialOverview>
     <AchieveGoals></AchieveGoals>

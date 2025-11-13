@@ -1,52 +1,102 @@
-import React, { use, useEffect, useState } from "react";
+import React, { use } from "react";
 import { Link, NavLink, useLocation, useNavigate } from "react-router";
 import { ImProfile } from "react-icons/im";
 import { AuthContext } from "../Context/AuthContext";
 import toast from "react-hot-toast";
+import { useTheme } from "next-themes";
+import { HiSun, HiMoon } from "react-icons/hi";
 
 const Navbar = () => {
   const { user, LogOut } = use(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-  useEffect(() => {
-    const html = document.querySelector("html");
-    html.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-  }, [theme]);
+  const { theme, setTheme } = useTheme();
+
   const links = (
     <>
       {user ? (
         <>
           <li className="text-[18px] font-medium">
-            <NavLink to="/">Home</NavLink>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-pink-500 dark:text-cyan-400"
+                  : "text-gray-700 dark:text-gray-300 hover:text-pink-500 dark:hover:text-cyan-400"
+              }
+            >
+              Home
+            </NavLink>
           </li>
           <li className="text-[18px] font-medium">
-            <NavLink to="/profile">My Profile</NavLink>
+            <NavLink
+              to="/add-transaction"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-pink-500 dark:text-cyan-400"
+                  : "text-gray-700 dark:text-gray-300 hover:text-pink-500 dark:hover:text-cyan-400"
+              }
+            >
+              Add Transaction
+            </NavLink>
           </li>
           <li className="text-[18px] font-medium">
-            <NavLink to="/add-transaction">Add Transaction</NavLink>
+            <NavLink
+              to="/my-transaction"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-pink-500 dark:text-cyan-400"
+                  : "text-gray-700 dark:text-gray-300 hover:text-pink-500 dark:hover:text-cyan-400"
+              }
+            >
+              My Transaction
+            </NavLink>
           </li>
           <li className="text-[18px] font-medium">
-            <NavLink to="/my-transaction">My Transaction</NavLink>
-          </li>
-          <li className="text-[18px] font-medium">
-            <NavLink to="/reports">Reports</NavLink>
+            <NavLink
+              to="/reports"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-pink-500 dark:text-cyan-400"
+                  : "text-gray-700 dark:text-gray-300 hover:text-pink-500 dark:hover:text-cyan-400"
+              }
+            >
+              Reports
+            </NavLink>
           </li>
         </>
       ) : (
         <>
           {" "}
           <li>
-            <NavLink to="/">Home</NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? "text-[18px] font-medium text-pink-500 dark:text-cyan-400"
+                  : "text-[18px] font-medium text-gray-700 dark:text-gray-300 hover:text-pink-500 dark:hover:text-cyan-400"
+              }
+              to="/"
+            >
+              Home
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/register">Register</NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                isActive
+                  ? "text-[18px] font-medium text-pink-500 dark:text-cyan-400"
+                  : "text-[18px] font-medium text-gray-700 dark:text-gray-300 hover:text-pink-500 dark:hover:text-cyan-400"
+              }
+              to="/register"
+            >
+              Register
+            </NavLink>
           </li>
         </>
       )}
     </>
   );
+
   const handleLogOut = () => {
     LogOut()
       .then(() => {
@@ -59,15 +109,25 @@ const Navbar = () => {
         }
       });
   };
-  const handleTheme = (checked) => {
-    setTheme(checked ? "dark" : "light");
+
+  const handleTheme = () => {
+    setTheme(theme === "dark" ? "light" : "dark");
   };
+
   return (
-    <div className=" drop-shadow-lg sticky text-white top-0 z-50 bg-gray-900  shadow-sm">
-      <div className=" navbar max-w-7xl mx-auto">
+    <div
+      className="drop-shadow-lg sticky top-0 z-50 
+                 bg-white text-gray-900 shadow-md
+                 dark:bg-gray-900 dark:text-white dark:shadow-xl dark:shadow-gray-800/50"
+    >
+      <div className="navbar max-w-7xl mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost lg:hidden text-gray-700 dark:text-white"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -84,9 +144,12 @@ const Navbar = () => {
                 />{" "}
               </svg>
             </div>
+
             <ul
-              tabIndex="-1"
-              className="menu menu-sm dropdown-content bg-gray-600 rounded-box z-1 mt-3 w-52 p-2 shadow"
+              tabIndex={0}
+              className="menu menu-sm dropdown-content 
+                         bg-gray-100 dark:bg-gray-700 
+                         rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               {links}
             </ul>
@@ -99,16 +162,29 @@ const Navbar = () => {
             />
             <Link
               to="/"
-              className="hover:underline text-pink-500 hover:text-blue-500 font-bold text-3xl"
+              className="hover:underline 
+                         text-pink-500 dark:text-cyan-400 
+                         font-bold text-3xl"
             >
               FinEase
             </Link>
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{links}</ul>
+          <ul className="menu menu-horizontal px-1 gap-2">{links}</ul>
         </div>
         <div className="navbar-end gap-3">
+          <button
+            onClick={handleTheme}
+            className="p-2 rounded-full border-2 dark:border-none border-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
+          >
+            {theme === "dark" ? (
+              <HiSun className="w-5 h-5 text-yellow-400" />
+            ) : (
+              <HiMoon className="w-5 h-5 text-gray-700" />
+            )}
+          </button>
+
           {user ? (
             <div className="dropdown dropdown-end z-50">
               <div
@@ -116,39 +192,38 @@ const Navbar = () => {
                 role="button"
                 className="btn btn-ghost btn-circle avatar"
               >
-                <div className="w-9 border-2 border-gray-300 bg-base-100 rounded-full">
+                <div className="w-9 border-2 border-gray-300 dark:border-cyan-400 bg-base-100 rounded-full">
                   <img
-                    alt="Tailwind CSS Navbar component"
+                    alt="User Avatar"
                     referrerPolicy="no-referrer"
                     src={user.photoURL}
                   />
                 </div>
               </div>
               <ul
-                tabIndex="-1"
-                className="menu  menu-sm dropdown-content bg-gray-600 rounded-box z-50 mt-3 w-52 p-2 shadow"
+                tabIndex={0}
+                className="menu menu-sm dropdown-content 
+                           bg-gray-100 dark:bg-gray-700 
+                           rounded-box z-50 mt-3 w-52 p-2 shadow 
+                           text-gray-700 dark:text-white"
               >
-                <div className=" pb-3 border-b border-b-gray-200">
-                  <li className="text-sm font-bold">{user.displayName}</li>
+                <div className=" pb-3 border-b border-b-gray-300 dark:border-b-gray-600">
+                  <li className="text-sm font-bold dark:text-cyan-400">
+                    {user.displayName}
+                  </li>
                   <li className="text-xs">{user.email}</li>
                 </div>
-                <li className="mt-3">
+                <li className="my-3">
                   <Link to={"/profile"}>
                     <ImProfile className="text-[20px]" /> Profile
                   </Link>
                 </li>
-                <div className=" p-2">
-                  <input
-                    onChange={(e) => handleTheme(e.target.checked)}
-                    type="checkbox"
-                    defaultChecked={localStorage.getItem("theme") === "dark"}
-                    className="toggle text-pink-600"
-                  />
-                </div>
                 <li>
                   <button
                     onClick={handleLogOut}
-                    className="btn rounded btn-primary text-white"
+                    className="btn rounded btn-primary 
+                               bg-pink-500 hover:bg-pink-600 border-none 
+                               dark:bg-cyan-500 dark:hover:bg-cyan-600 text-white"
                   >
                     Logout
                   </button>
@@ -156,7 +231,12 @@ const Navbar = () => {
               </ul>
             </div>
           ) : (
-            <Link to={"/login"} className="btn rounded btn-primary text-white">
+            <Link
+              to={"/login"}
+              className="btn rounded  
+                         bg-pink-500 hover:bg-pink-600 border-none 
+                         dark:bg-cyan-500 dark:hover:bg-cyan-600 text-white"
+            >
               {" "}
               Login
             </Link>

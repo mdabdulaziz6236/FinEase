@@ -54,37 +54,52 @@ const AddTransaction = () => {
       });
   };
 
+  const InputClasses = 
+    "w-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-700 px-4 py-2 rounded-lg text-gray-900 dark:text-gray-200 focus:ring-indigo-500 focus:border-indigo-500 transition duration-150 shadow-sm";
+  
+  const LabelClasses = 
+    "block text-sm font-medium mb-1 text-gray-700 dark:text-gray-300";
+
   return (
-    <div className="flex justify-center items-center px-4 py-10 bg-gray-800 min-h-screen">
-      <div className="bg-gray-900 p-6 rounded-2xl shadow-lg w-full max-w-lg">
-        <h2 className="text-2xl font-bold mb-4 text-center text-indigo-400">
-          Add Transaction
+    <div 
+
+      className="flex justify-center items-center px-4 py-10 min-h-screen bg-gray-50 dark:bg-gray-900"
+    >
+      <title>Add Transaction</title>
+      <div 
+        className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-2xl dark:shadow-indigo-500/15 w-full max-w-lg border border-gray-200 dark:border-gray-700"
+      >
+        <h2 
+          className="text-3xl font-extrabold mb-6 text-center text-indigo-600 dark:text-cyan-400"
+        >
+          New Transaction
         </h2>
 
-        <form onSubmit={handleAddTransaction} className="space-y-4">
+        <form onSubmit={handleAddTransaction} className="space-y-5">
           {/* Type */}
           <div>
-            <label className="block text-sm font-medium mb-1 text-gray-300">
+            <label className={LabelClasses}>
               Type
             </label>
             <select
               name="type"
-              className="w-full border border-gray-700 bg-gray-800 px-3 py-2 rounded-md text-gray-200"
+              className={InputClasses}
               required
             >
-              <option value="income">Income</option>
-              <option value="expense">Expense</option>
+              {/* Option text color needs to be adjusted via parent class */}
+              <option value="income" className="text-green-600 dark:text-green-400">Income</option>
+              <option value="expense" className="text-red-600 dark:text-red-400">Expense</option>
             </select>
           </div>
 
           {/* Category */}
           <div>
-            <label className="block text-sm font-medium mb-1 text-gray-300">
+            <label className={LabelClasses}>
               Category
             </label>
             <select
               name="category"
-              className="w-full border border-gray-700 bg-gray-800 px-3 py-2 rounded-md text-gray-200"
+              className={InputClasses}
               required
             >
               <option value="salary">Salary</option>
@@ -98,76 +113,84 @@ const AddTransaction = () => {
 
           {/* Amount */}
           <div>
-            <label className="block text-sm font-medium mb-1 text-gray-300">
+            <label className={LabelClasses}>
               Amount
             </label>
             <input
-              type="number"
               name="amount"
               placeholder="Enter amount"
-              className="w-full border border-gray-700 bg-gray-800 px-3 py-2 rounded-md text-gray-200"
+              className={InputClasses}
               required
             />
           </div>
 
           {/* Description */}
           <div>
-            <label className="block text-sm font-medium mb-1 text-gray-300">
+            <label className={LabelClasses}>
               Description
             </label>
             <input
               type="text"
               name="description"
-              placeholder="Enter description"
-              className="w-full border border-gray-700 bg-gray-800 px-3 py-2 rounded-md text-gray-200"
+              placeholder="Description"
+              className={InputClasses}
               required
             />
           </div>
 
           {/* Date */}
           <div>
-            <label className="block text-sm font-medium mb-1 text-gray-300">
+            <label className={LabelClasses}>
               Date
             </label>
             <input
               type="date"
               name="date"
-              className="w-full border border-gray-700 bg-gray-800 px-3 py-2 rounded-md text-gray-200"
+              className={InputClasses}
               required
             />
           </div>
 
-          {/* User info */}
+          {/* User info  */}
           <div>
-            <label className="block text-sm font-medium mb-1 text-gray-300">
-              Name
+            <label className={LabelClasses}>
+              Name (Read-only)
             </label>
             <input
               type="text"
-              value={user?.displayName || ""}
+              value={user?.displayName || "Loading..."}
               readOnly
-              className="w-full border border-gray-700 px-3 py-2 rounded-md bg-gray-800 text-gray-200"
+              className={`w-full border border-gray-300 dark:border-gray-700 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-400 bg-gray-100 dark:bg-gray-700/50`}
             />
           </div>
           <div>
-            <label className="block text-sm font-medium mb-1 text-gray-300">
-              Email
+            <label className={LabelClasses}>
+              Email (Read-only)
             </label>
             <input
               type="email"
-              value={user?.email || ""}
+              value={user?.email || "Loading..."}
               readOnly
-              className="w-full border border-gray-700 px-3 py-2 rounded-md bg-gray-800 text-gray-200"
+              className={`w-full border border-gray-300 dark:border-gray-700 px-4 py-2 rounded-lg text-gray-700 dark:text-gray-400 bg-gray-100 dark:bg-gray-700/50`}
             />
           </div>
 
-          {/* Submit Button */}
+          {/* Submit Button  */}
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-indigo-400 text-gray-900 py-2 rounded-md font-semibold hover:bg-indigo-500 transition"
+            className={`w-full py-3 rounded-lg font-extrabold transition duration-150 
+                      bg-indigo-600 dark:bg-cyan-500 text-white dark:text-gray-900 
+
+                      ${loading ? 'opacity-70 cursor-not-allowed' : 'shadow-lg  '}`}
           >
-            {loading ? "Adding..." : "Add Transaction"}
+            {loading ? (
+              <span className="flex items-center justify-center">
+                Adding...
+              </span>
+            ) : (
+              "Add Transaction"
+            )}
           </button>
         </form>
       </div>

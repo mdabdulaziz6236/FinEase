@@ -3,7 +3,7 @@
 @import "tailwindcss";
 @plugin "daisyui";
 
-
+@custom-variant dark (&:where(.dark, .dark *));
 .navbar .active {
   color: dodgerblue;
   font-weight: bold;

@@ -14,7 +14,7 @@ const MainLayout = () => {
   return (
     <div className="">
       <Navbar></Navbar>
-      <div className="bg-gray-800">
+      <div className="dark:bg-gray-800">
         <Outlet></Outlet>
       </div>
       <Footer></Footer>
