@@ -7,7 +7,7 @@ function App() {
     <>
     
       <h1>Bismillahir Rahmanir Rahim.</h1>
-      <h3>Salli Alal Habib wa barik wa alihi wa sallama.</h3>
+      <h3>Salli Alal Habib wa barik wa sallim wa alihi wa ashabihi ajmain.</h3>
     </>
   )
 }

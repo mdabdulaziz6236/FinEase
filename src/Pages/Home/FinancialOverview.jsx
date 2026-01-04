@@ -50,7 +50,7 @@ const FinancialOverview = () => {
     "bg-indigo-50 dark:bg-gray-800 border-indigo-300 dark:border-indigo-700 dark:shadow-lg dark:shadow-cyan-500/20";
 
   return (
-    <section className="md:py-14 py-8 lg:py-20 px-4 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-200">
+    <section className="md:py-14 py-8 lg:py-20 px-4 bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-200">
       <div className="max-w-6xl mx-auto">
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-center mb-4 tracking-tight text-indigo-700 dark:text-cyan-400">
           Your Financial Snapshot
