@@ -30,6 +30,18 @@ const Navbar = () => {
           </li>
           <li className="text-[18px] font-medium">
             <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-pink-500 dark:text-cyan-400"
+                  : "text-gray-700 dark:text-gray-300 hover:text-pink-500 dark:hover:text-cyan-400"
+              }
+            >
+              About Us
+            </NavLink>
+          </li>
+          <li className="text-[18px] font-medium">
+            <NavLink
               to="/add-transaction"
               className={({ isActive }) =>
                 isActive
@@ -78,6 +90,18 @@ const Navbar = () => {
               to="/"
             >
               Home
+            </NavLink>
+          </li>
+          <li className="text-[18px] font-medium">
+            <NavLink
+              to="/about"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-pink-500 dark:text-cyan-400"
+                  : "text-gray-700 dark:text-gray-300 hover:text-pink-500 dark:hover:text-cyan-400"
+              }
+            >
+              About Us
             </NavLink>
           </li>
           <li>

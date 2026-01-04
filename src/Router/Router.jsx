@@ -13,6 +13,7 @@ import TransactionDetails from "../Pages/TransactionDetails/TransactionDetails";
 import UpdateTransaction from "../Pages/UpdateTransaction/UpdateTransaction";
 import PrivetRoutes from "./PrivetRoutes";
 import ErrorPage from "../Pages/ErrorPgae/ErrorPage";
+import About from "../Pages/About/About";
 
 export const router = createBrowserRouter([
   {
@@ -26,6 +27,10 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         Component: Register,
+      },
+      {
+        path: "/about",
+        Component: About,
       },
       {
         path: "/login",
