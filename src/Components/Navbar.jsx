@@ -42,6 +42,18 @@ const Navbar = () => {
           </li>
           <li className="text-[18px] font-medium">
             <NavLink
+              to="/contact"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-pink-500 dark:text-cyan-400"
+                  : "text-gray-700 dark:text-gray-300 hover:text-pink-500 dark:hover:text-cyan-400"
+              }
+            >
+              Contact
+            </NavLink>
+          </li>
+          <li className="text-[18px] font-medium">
+            <NavLink
               to="/add-transaction"
               className={({ isActive }) =>
                 isActive
@@ -104,16 +116,16 @@ const Navbar = () => {
               About Us
             </NavLink>
           </li>
-          <li>
+          <li className="text-[18px] font-medium">
             <NavLink
+              to="/contact"
               className={({ isActive }) =>
                 isActive
-                  ? "text-[18px] font-medium text-pink-500 dark:text-cyan-400"
-                  : "text-[18px] font-medium text-gray-700 dark:text-gray-300 hover:text-pink-500 dark:hover:text-cyan-400"
+                  ? "text-pink-500 dark:text-cyan-400"
+                  : "text-gray-700 dark:text-gray-300 hover:text-pink-500 dark:hover:text-cyan-400"
               }
-              to="/register"
             >
-              Register
+              Contact
             </NavLink>
           </li>
         </>
